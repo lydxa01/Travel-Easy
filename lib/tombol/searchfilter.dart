@@ -9,6 +9,9 @@ class SearchFilterPage extends StatefulWidget {
 }
 
 class _SearchFilterPageState extends State<SearchFilterPage> {
+  // Create a text controller to retrieve the current value of the TextField
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,79 +20,95 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text('Search and Filter Content Goes Here'),
-            // Add your search and filter widgets here
+            // Add the search TextField here
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  labelText: 'Search',
+                  hintText: 'Type to search...',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            Text(
+              'Travel Destinations',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Expanded(
+              child: ListView(
+                children: [
+                  TravelDestination(
+                    name: 'Gunung',
+                    description:
+                        'Explore beautiful mountains and hiking trails.',
+                  ),
+                  TravelDestination(
+                    name: 'Pantai',
+                    description:
+                        'Relax on the sunny beaches and enjoy water sports.',
+                  ),
+                  TravelDestination(
+                    name: 'Sejarah',
+                    description:
+                        'Discover historical sites and cultural heritage.',
+                  ),
+                  TravelDestination(
+                    name: 'Danau',
+                    description: 'Visit serene lakes for boating and fishing.',
+                  ),
+                  TravelDestination(
+                    name: 'Bukit',
+                    description: 'Hike up scenic hills for breathtaking views.',
+                  ),
+                  TravelDestination(
+                    name: 'Curug',
+                    description: 'Chase waterfalls and enjoy nature\'s beauty.',
+                  ),
+                  TravelDestination(
+                    name: 'Goa',
+                    description:
+                        'Explore mysterious caves and underground wonders.',
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-}
-
-class CategoryPage extends StatefulWidget {
-  const CategoryPage({Key? key}) : super(key: key);
 
   @override
-  _CategoryPageState createState() => _CategoryPageState();
-}
-
-class _CategoryPageState extends State<CategoryPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Categories'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          TouristSpotCategory(category: 'Gunung')),
-                );
-              },
-              child: Text('Gunung'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          TouristSpotCategory(category: 'Danau')),
-                );
-              },
-              child: Text('Danau'),
-            ),
-            // Add more category buttons as needed
-          ],
-        ),
-      ),
-    );
+  void dispose() {
+    // Dispose the controller when the widget is disposed
+    _searchController.dispose();
+    super.dispose();
   }
 }
 
-class TouristSpotCategory extends StatelessWidget {
-  final String category;
+class TravelDestination extends StatelessWidget {
+  final String name;
+  final String description;
 
-  const TouristSpotCategory({Key? key, required this.category})
-      : super(key: key);
+  TravelDestination({
+    required this.name,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(category),
-      ),
-      body: Center(
-        child: LText(text: 'Tourist Spots related to $category'),
+    return Card(
+      elevation: 2,
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: ListTile(
+        title: Text(name),
+        subtitle: Text(description),
       ),
     );
   }
@@ -98,7 +117,7 @@ class TouristSpotCategory extends StatelessWidget {
 void main() {
   runApp(
     MaterialApp(
-      home: CategoryPage(),
+      home: SearchFilterPage(),
     ),
   );
 }
