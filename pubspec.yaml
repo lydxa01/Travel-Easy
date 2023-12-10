@@ -83,6 +83,7 @@ flutter:
     - assets/hill.png
     - assets/mountain.png
     - assets/beach.png
+    - assets/gunung_rinjani.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

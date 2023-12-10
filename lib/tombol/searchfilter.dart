@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:final_uts_v3422026/resources/large_text.dart';
+import 'package:final_uts_v3422026/isigunung.dart/rinjani.dart';
 
 class SearchFilterPage extends StatefulWidget {
   const SearchFilterPage({Key? key}) : super(key: key);
@@ -9,8 +10,119 @@ class SearchFilterPage extends StatefulWidget {
 }
 
 class _SearchFilterPageState extends State<SearchFilterPage> {
-  // Create a text controller to retrieve the current value of the TextField
   final TextEditingController _searchController = TextEditingController();
+  List<TravelDestination> allDestinations = [
+    TravelDestination(
+      name: 'Gunung Rinjani',
+      description: 'The second-highest volcano in Indonesia located in Lombok.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Gunung Merbabu',
+      description: 'The second-highest volcano in Indonesia located in Lombok.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Gunung Lawu',
+      description: 'The second-highest volcano in Indonesia located in Lombok.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Gunung Jayawijaya',
+      description: 'The second-highest volcano in Indonesia located in Lombok.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Gunung Tangkuban Perahu',
+      description: 'The second-highest volcano in Indonesia located in Lombok.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Danau Toba',
+      description:
+          'The largest volcanic lake in the world, located in Sumatra.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Danau Kelimutu',
+      description:
+          'The largest volcanic lake in the world, located in Sumatra.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Danau Sentani',
+      description:
+          'The largest volcanic lake in the world, located in Sumatra.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Danau Labuan Cermin',
+      description:
+          'The largest volcanic lake in the world, located in Sumatra.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Danau Segara Anak',
+      description:
+          'The largest volcanic lake in the world, located in Sumatra.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Goa Jomblang',
+      description: 'Famous cave located in Yogyakarta with a heavenly light.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Air Terjun Tumpak Sewu',
+      description:
+          'Spectacular waterfall in East Java, often called "The Niagara of Indonesia."',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Candi Borobudur',
+      description:
+          'One of the largest Buddhist temples in the world, located in Central Java.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Pantai Kuta',
+      description:
+          'Famous beach in Bali known for its white sand and surfing spots.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+    TravelDestination(
+      name: 'Bukit Teletubbies',
+      description:
+          'A scenic hill in Bromo with a landscape reminiscent of Teletubbies.',
+      imagePath: 'assets/gunung_rinjani.jpg',
+    ),
+  ];
+
+  List<TravelDestination> displayedDestinations = [];
+
+  @override
+  void initState() {
+    super.initState();
+    displayedDestinations = List.from(allDestinations);
+  }
+
+  void filterDestinations(String query) {
+    setState(() {
+      displayedDestinations = allDestinations
+          .where((destination) =>
+              destination.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
+  }
+
+  void onDestinationTapped(TravelDestination destination) {
+    if (destination.name == 'Gunung Rinjani') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => RinjaniPage()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +134,12 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // Add the search TextField here
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: TextField(
                 controller: _searchController,
+                onChanged: filterDestinations,
                 decoration: InputDecoration(
                   labelText: 'Search',
                   hintText: 'Type to search...',
@@ -41,41 +153,13 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Expanded(
-              child: ListView(
-                children: [
-                  TravelDestination(
-                    name: 'Gunung',
-                    description:
-                        'Explore beautiful mountains and hiking trails.',
-                  ),
-                  TravelDestination(
-                    name: 'Pantai',
-                    description:
-                        'Relax on the sunny beaches and enjoy water sports.',
-                  ),
-                  TravelDestination(
-                    name: 'Sejarah',
-                    description:
-                        'Discover historical sites and cultural heritage.',
-                  ),
-                  TravelDestination(
-                    name: 'Danau',
-                    description: 'Visit serene lakes for boating and fishing.',
-                  ),
-                  TravelDestination(
-                    name: 'Bukit',
-                    description: 'Hike up scenic hills for breathtaking views.',
-                  ),
-                  TravelDestination(
-                    name: 'Curug',
-                    description: 'Chase waterfalls and enjoy nature\'s beauty.',
-                  ),
-                  TravelDestination(
-                    name: 'Goa',
-                    description:
-                        'Explore mysterious caves and underground wonders.',
-                  ),
-                ],
+              child: ListView.builder(
+                itemCount: displayedDestinations.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return TravelDestinationCard(
+                    destination: displayedDestinations[index],
+                  );
+                },
               ),
             ),
           ],
@@ -86,20 +170,27 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
 
   @override
   void dispose() {
-    // Dispose the controller when the widget is disposed
     _searchController.dispose();
     super.dispose();
   }
 }
 
-class TravelDestination extends StatelessWidget {
+class TravelDestination {
   final String name;
   final String description;
+  final String imagePath; // Add this line
 
   TravelDestination({
     required this.name,
     required this.description,
+    required this.imagePath, // Add this line
   });
+}
+
+class TravelDestinationCard extends StatelessWidget {
+  final TravelDestination destination;
+
+  TravelDestinationCard({required this.destination});
 
   @override
   Widget build(BuildContext context) {
@@ -107,9 +198,29 @@ class TravelDestination extends StatelessWidget {
       elevation: 2,
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: ListTile(
-        title: Text(name),
-        subtitle: Text(description),
+        onTap: () {
+          onDestinationTapped(context, destination);
+        },
+        leading: Image.asset(
+          destination.imagePath,
+          width: 50,
+          height: 50,
+        ),
+        title: Text(destination.name),
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(destination.description),
+        ),
       ),
+    );
+  }
+}
+
+void onDestinationTapped(BuildContext context, TravelDestination destination) {
+  if (destination.name == 'Gunung Rinjani') {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RinjaniPage()),
     );
   }
 }

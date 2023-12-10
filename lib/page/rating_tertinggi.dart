@@ -11,7 +11,6 @@ class RatingTertinggi extends StatefulWidget {
 }
 
 class _RatingTertinggiState extends State<RatingTertinggi> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +100,6 @@ class _RatingTertinggiState extends State<RatingTertinggi> {
                   },
                 ),
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
