@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class GunungPage extends StatelessWidget {
-  final String kategori;
+  final Gunung gunung;
 
-  GunungPage({required this.kategori});
+  GunungPage({required this.gunung});
 
   @override
   Widget build(BuildContext context) {
@@ -17,29 +17,28 @@ class GunungPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Gunung di Indonesia - $kategori',
+              'Gunung di Indonesia - ${gunung.name}',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: gunungList.length,
+              itemCount: 1, // Since you're displaying a single mountain
               itemBuilder: (context, index) {
                 return Card(
                   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: ListTile(
                     leading: Image.asset(
-                      gunungList[index].imagePath,
+                      gunung.imagePath,
                       width: 60,
                       height: 60,
                       fit: BoxFit.cover,
                     ),
-                    title: Text(gunungList[index].name),
-                    subtitle:
-                        Text('Ketinggian: ${gunungList[index].height} meter'),
+                    title: Text(gunung.name),
+                    subtitle: Text('Ketinggian: ${gunung.height} meter'),
                     onTap: () {
                       // Aksi yang akan dilakukan saat gunung diklik
-                      print("Anda mengklik ${gunungList[index].name}");
+                      print("Anda mengklik ${gunung.name}");
                     },
                   ),
                 );

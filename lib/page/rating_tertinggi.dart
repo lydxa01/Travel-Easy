@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:final_uts_v3422026/page/lokasi.dart';
 import 'package:final_uts_v3422026/page/untuk_widget.dart';
 import 'package:final_uts_v3422026/resources/large_text.dart';
+import 'package:final_uts_v3422026/kategoripage/gunung.dart';
 
 class RatingTertinggi extends StatefulWidget {
   const RatingTertinggi({Key? key}) : super(key: key);
@@ -79,7 +80,14 @@ class _RatingTertinggiState extends State<RatingTertinggi> {
                         InkWell(
                           onTap: () {
                             // Aksi yang akan dilakukan saat gambar diklik
-                            print("Anda mengklik ${data[index].nma}");
+                            // Navigasi ke GunungPage dengan mengirimkan informasi gunung
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    GunungPage(gunung: gunungList[index]),
+                              ),
+                            );
                           },
                           child: Container(
                             width: 40,
