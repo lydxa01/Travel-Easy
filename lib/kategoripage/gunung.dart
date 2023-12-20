@@ -1,83 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:final_uts_v3422026/page/rating_tertinggi.dart';
 
 class GunungPage extends StatelessWidget {
   final Gunung gunung;
 
-  GunungPage({required this.gunung});
+  const GunungPage({Key? key, required this.gunung}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gunung di Indonesia'),
+        title: Text(gunung.nama),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Gunung di Indonesia - ${gunung.name}',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              gunung.gambar,
+              width: 200,
+              height: 200,
+              fit: BoxFit.cover,
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 1, // Since you're displaying a single mountain
-              itemBuilder: (context, index) {
-                return Card(
-                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: ListTile(
-                    leading: Image.asset(
-                      gunung.imagePath,
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
-                    title: Text(gunung.name),
-                    subtitle: Text('Ketinggian: ${gunung.height} meter'),
-                    onTap: () {
-                      // Aksi yang akan dilakukan saat gunung diklik
-                      print("Anda mengklik ${gunung.name}");
-                    },
-                  ),
-                );
-              },
+            SizedBox(height: 20),
+            Text(
+              'Informasi Gunung:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-          ),
-        ],
+            SizedBox(height: 10),
+            Text('Nama: ${gunung.nama}'),
+            Text('Ketinggian: ${gunung.ketinggian}'),
+            // Add more information as needed
+          ],
+        ),
       ),
     );
   }
 }
 
 class Gunung {
-  final String name;
-  final int height;
-  final String imagePath;
+  final String nama;
+  final double ketinggian;
+  final String gambar;
 
   Gunung({
-    required this.name,
-    required this.height,
-    required this.imagePath,
+    required this.nama,
+    required this.ketinggian,
+    required this.gambar,
   });
 }
 
 List<Gunung> gunungList = [
   Gunung(
-    name: 'Gunung Rinjani',
-    height: 3726,
-    imagePath: 'assets/gunung_rinjani.jpg',
+    nama: 'Gunung Rinjani',
+    ketinggian: 3726,
+    gambar: 'assets/gunung_rinjani.jpg',
   ),
   Gunung(
-    name: 'Gunung Semeru',
-    height: 3676,
-    imagePath: 'assets/gunung_semeru.jpg',
+    nama: 'Gunung Semeru',
+    ketinggian: 3676,
+    gambar: 'assets/gunung_semeru.jpg',
   ),
   Gunung(
-    name: 'Gunung Kerinci',
-    height: 3805,
-    imagePath: 'assets/gunung_kerinci.jpg',
+    nama: 'Gunung Kerinci',
+    ketinggian: 3805,
+    gambar: 'assets/gunung_kerinci.jpg',
   ),
-  // Tambahkan gunung lain sesuai kebutuhan
+  // Add other mountains as needed
 ];

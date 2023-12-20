@@ -3,6 +3,13 @@ import 'package:final_uts_v3422026/page/lokasi.dart';
 import 'package:final_uts_v3422026/page/untuk_widget.dart';
 import 'package:final_uts_v3422026/resources/large_text.dart';
 import 'package:final_uts_v3422026/kategoripage/gunung.dart';
+import 'package:final_uts_v3422026/kategoripage/bukit.dart';
+import 'package:final_uts_v3422026/kategoripage/curug.dart';
+import 'package:final_uts_v3422026/kategoripage/danau.dart';
+import 'package:final_uts_v3422026/kategoripage/goa.dart';
+import 'package:final_uts_v3422026/kategoripage/pantai.dart';
+import 'package:final_uts_v3422026/kategoripage/sejarah.dart';
+import 'package:final_uts_v3422026/kategoripage/umbul.dart';
 
 class RatingTertinggi extends StatefulWidget {
   const RatingTertinggi({Key? key}) : super(key: key);
@@ -79,13 +86,23 @@ class _RatingTertinggiState extends State<RatingTertinggi> {
                       children: [
                         InkWell(
                           onTap: () {
-                            // Aksi yang akan dilakukan saat gambar diklik
-                            // Navigasi ke GunungPage dengan mengirimkan informasi gunung
+                            // Update this onTap to navigate to the correct page
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    GunungPage(gunung: gunungList[index]),
+                                builder: (context) {
+                                  // Use a switch statement or if-else to determine the correct page
+                                  switch (data[index].category) {
+                                    case 'Gunung':
+                                      return GunungPage(
+                                          gunung: gunungList[index]);
+                                    case 'Danau':
+                                      return DanauPage(danau: danauList[index]);
+                                    // Add cases for other categories as needed
+                                    default:
+                                      return Container(); // Handle default case
+                                  }
+                                },
                               ),
                             );
                           },

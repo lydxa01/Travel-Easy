@@ -13,7 +13,7 @@ class _RegisState extends State<Regis> {
 
   void navigateToLogin() {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) => Login(), 
+      builder: (context) => Login(),
     ));
   }
 
@@ -30,31 +30,36 @@ class _RegisState extends State<Regis> {
         children: [
           TextField(
             autocorrect: false,
-            decoration: InputDecoration(labelText: "Nama", prefixIcon: Icon(Icons.person)),
+            decoration: InputDecoration(
+                labelText: "Nama", prefixIcon: Icon(Icons.person)),
           ),
           TextField(
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(labelText: "Email", prefixIcon: Icon(Icons.email)),
+            decoration: InputDecoration(
+                labelText: "Email", prefixIcon: Icon(Icons.email)),
           ),
           TextField(
             autocorrect: false,
             obscureText: true,
-            decoration: InputDecoration(labelText: "Password", prefixIcon: Icon(Icons.vpn_key)),
+            decoration: InputDecoration(
+                labelText: "Password", prefixIcon: Icon(Icons.vpn_key)),
           ),
           TextField(
             autocorrect: false,
             obscureText: true,
-            decoration: InputDecoration(labelText: "Konfirmasi Password", prefixIcon: Icon(Icons.vpn_key)),
+            decoration: InputDecoration(
+                labelText: "Konfirmasi Password",
+                prefixIcon: Icon(Icons.vpn_key)),
           ),
           SizedBox(height: 50),
           ElevatedButton(
-            onPressed: () {
-            },
+            onPressed: () {},
             child: Text("DAFTAR"),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.lightGreenAccent),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.lightGreenAccent),
           ),
-          SizedBox(height: 10), 
+          SizedBox(height: 10),
           TextButton(
             onPressed: navigateToLogin,
             child: Text("Sudah Punya Akun? Login"),
